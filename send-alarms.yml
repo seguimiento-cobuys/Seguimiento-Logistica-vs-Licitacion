@@ -1,0 +1,37 @@
+name: Enviar Alarmas WhatsApp Diarias
+
+on:
+  schedule:
+    # Ejecutar a las 8:00 AM hora de Panamá (UTC-5)
+    # 13:00 UTC = 8:00 AM Panamá
+    - cron: '0 13 * * *'
+  
+  # Permite ejecución manual desde GitHub
+  workflow_dispatch:
+
+jobs:
+  send-alarms:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      
+      - name: Install dependencies
+        working-directory: ./backend
+        run: npm install
+      
+      - name: Send WhatsApp Alarms
+        working-directory: ./backend
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          TWILIO_SID: ${{ secrets.TWILIO_SID }}
+          TWILIO_AUTH_TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}
+          TWILIO_WHATSAPP_NUMBER: ${{ secrets.TWILIO_WHATSAPP_NUMBER }}
+          ALARM_PHONE_NUMBERS: ${{ secrets.ALARM_PHONE_NUMBERS }}
+        run: node ../scripts/send-whatsapp-alarms.js
