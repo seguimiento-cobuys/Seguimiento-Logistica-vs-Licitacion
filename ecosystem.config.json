@@ -1,0 +1,36 @@
+{
+    "apps": [
+        {
+            "name": "logistics-backend",
+            "script": "backend/server.js",
+            "cwd": "c:/Users/Karla Lopez/Tagore Dropbox/Karla Lopez/Desktop/Nuevo archivo de inversionistas/Seguimiento Logistica vs Licitacion",
+            "env": {
+                "NODE_ENV": "production",
+                "PORT": "5000"
+            },
+            "error_file": "logs/backend-error.log",
+            "out_file": "logs/backend-out.log",
+            "log_date_format": "YYYY-MM-DD HH:mm:ss",
+            "autorestart": true,
+            "watch": false,
+            "max_restarts": 10,
+            "min_uptime": "10s"
+        },
+        {
+            "name": "logistics-frontend",
+            "script": "node_modules/vite/bin/vite.js",
+            "args": "preview --host --port 5173",
+            "cwd": "c:/Users/Karla Lopez/Tagore Dropbox/Karla Lopez/Desktop/Nuevo archivo de inversionistas/Seguimiento Logistica vs Licitacion/frontend",
+            "env": {
+                "NODE_ENV": "production"
+            },
+            "error_file": "../logs/frontend-error.log",
+            "out_file": "../logs/frontend-out.log",
+            "log_date_format": "YYYY-MM-DD HH:mm:ss",
+            "autorestart": true,
+            "watch": false,
+            "max_restarts": 10,
+            "min_uptime": "10s"
+        }
+    ]
+}
